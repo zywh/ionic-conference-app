@@ -118,4 +118,13 @@ class ConferenceApp {
 // See the theming docs for the default values:
 // http://ionicframework.com/docs/v2/theming/platform-specific-styles/
 
-ionicBootstrap(ConferenceApp, [ConferenceData, UserData], { });
+ionicBootstrap(ConferenceApp, [ConferenceData, UserData], {
+  prodMode: true,
+  platforms: {
+    android: {
+      tabsPlacement: 'top',
+      tabsHideOnSubPages: true,
+      tabsHighlight: true
+    }
+  }
+});
