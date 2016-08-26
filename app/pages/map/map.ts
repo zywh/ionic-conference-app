@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavParams ,ToastController} from 'ionic-angular';
 
 import { ConferenceData } from '../../providers/conference-data';
 
@@ -7,7 +8,7 @@ import { ConferenceData } from '../../providers/conference-data';
   templateUrl: 'build/pages/map/map.html'
 })
 export class MapPage {
-  constructor(public confData: ConferenceData) {}
+  constructor(public confData: ConferenceData,private toastCtrl: ToastController) {}
 
   ionViewLoaded() {
     this.confData.getMap().then(mapData => {
@@ -37,7 +38,22 @@ export class MapPage {
       google.maps.event.addListenerOnce(map, 'idle', () => {
         mapEle.classList.add('show-map');
       });
+       google.maps.event.addListener(map, 'idle', () => {
+        this.presentToast();
+      });
 
     });
   }
+presentToast() {
+    let toast = this.toastCtrl.create({
+      message: "loading",
+      duration: 1000,
+      position: 'bottom'
+     
+    });
+   
+
+    toast.present();
+  }
+
 }
